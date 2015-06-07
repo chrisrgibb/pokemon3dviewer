@@ -1,0 +1,13 @@
+.DS_Store
+*.pyc
+
+# flask files
+/venv
+
+
+# build files
+
+/static/build
+/static/node_modules
+
+*.gbc

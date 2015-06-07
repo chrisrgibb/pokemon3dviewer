@@ -12,8 +12,8 @@ Renderer.prototype = {
   init : function(scne /*TODO fix this*/,gameWorld){
     var renderer = this;
     return new Promise(function(fulfill, reject){
-      console.log('heyo');
-      renderer.scene = new THREE.Scene();
+
+
       renderer.camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
       renderer.THREErenderer = new THREE.WebGLRenderer();
 
@@ -28,22 +28,15 @@ Renderer.prototype = {
       var directionalLight = new THREE.PointLight( 0xffffff, 2 );
       directionalLight.position.set( 10, 8, 20 );
 
+      renderer.scene = new THREE.Scene();
+
       renderer.scene.add( directionalLight );
 
       renderer.camera.rotation.order = "YXZ";
       renderer.camera.position.set(3, 10,25);
 
 
-
-      // var img1 = pipeline.getImage(2, 4, 4);
-
-      var img1 = renderer.textureArray[67];
-
-      console.log(scene);
-      var scene = renderer.scene;
-      //  renderer = renderer.renderer,
-
-      renderer.addWorldToScene(scene, gameWorld);
+      renderer.addWorldToScene(renderer.scene, gameWorld);
 
       fulfill();
 
@@ -96,8 +89,6 @@ Renderer.prototype = {
 
   render : function(){
     this.THREErenderer.render(this.scene, this.camera);
-
-
   }
 
 };

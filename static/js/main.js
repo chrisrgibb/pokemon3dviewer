@@ -7,7 +7,7 @@ var imageArray = [],
   gameWorld,
   player;
 
-function getData(){
+function init(){
   var level = 4;
 
   var loader = new THREE.XHRLoader();
@@ -34,14 +34,7 @@ function getData(){
 }
 
 
-getData();
-
-function init(){
-
-
-
-
-}
+init();
 
 function update(){
   requestAnimationFrame( update );

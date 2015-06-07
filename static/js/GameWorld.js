@@ -43,6 +43,10 @@ function GameWorld(data){
   }
   this.collisions = data.collisions;
   this.tiles = getTileMap(data, this);
+
+  var heights = new Heights();
+  heights.computeHeights(this.tiles);
+
   this.width = this.tiles[0].length;
   this.height = this.tiles.length;
   this.light = 0.6;
