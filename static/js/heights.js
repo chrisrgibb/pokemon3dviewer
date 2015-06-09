@@ -35,17 +35,17 @@ Heights.prototype = {
 
         if(elem.isEnd(currentTile, nextTile)){
           foundEnd = true;
-          debugger;
+
           var row = {
-            start : x,
+            x : x,
             end : i,
-            y : y
+            y : y,
+            width : i - x + 1
           };
 
           elem.add(row);
 
           index = i + (y * width);
-
 
           return i + (y * width);
         }
@@ -55,8 +55,6 @@ Heights.prototype = {
     };
 
 
-
-
     while(index < end-1){
 
       var x = index % width,
@@ -64,7 +62,7 @@ Heights.prototype = {
           startTile,
           currentTile,
           nextTile;
-  
+
           currentTile = data[y][x];
       console.log(y + " " + x + " index : " + index);
 
@@ -77,6 +75,9 @@ Heights.prototype = {
 
       index++;
     }
+
+    building.mapHeights();
+
     return {
       buildings : building,
       cliffs : cliff
@@ -85,6 +86,12 @@ Heights.prototype = {
 
   getHeights : function(x, y){
     return null;
+
+
+  },
+
+  mapHeights: function(h){
+
 
 
   }

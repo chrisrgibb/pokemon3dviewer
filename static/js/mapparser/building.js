@@ -2,10 +2,9 @@ function Building(config){
   this.startTiles = [15, 76, 78, 90,92 ];
   this.endTiles = [31, 77, 79, 90, 93];
 
-  // this.startCharacters = 
+  // this.startCharacters =
 
   this.sections = [];
-  this.sections2 = [];
   this.rows = [];
 }
 
@@ -30,16 +29,16 @@ Building.prototype = {
   },
 
   add : function(row){
-    var len = this.sections2.length;
+    var len = this.sections.length;
     if(len===0){
       var newSection = new Section();
       newSection.add(row);
 
-      this.sections2.push(newSection);
+      this.sections.push(newSection);
     } else {
       // check all sections to see if we can add to them
       for(var i = 0; i < len; i++){
-        var section = this.sections2[i];
+        var section = this.sections[i];
         if(section.canAdd(row)){
           section.add(row);
           return;
@@ -48,8 +47,19 @@ Building.prototype = {
       var newSection = new Section();
       newSection.add(row);
 
-      this.sections2.push(newSection);
+      this.sections.push(newSection);
     }
+  },
+
+  mapHeights : function(){
+    this.sections.forEach(function(section, index){
+      var height = section.rows.length;
+      if(height > 1){
+      
+
+
+      }
+    }, this);
   }
 }
 
