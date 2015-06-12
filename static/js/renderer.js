@@ -44,14 +44,15 @@ Renderer.prototype = {
   },
 
   addWorldToScene : function(scene, world){
-    var tiles = world.tiles;
+    var tiles = world.tiles,
+    cube, texture, index;
 
     for(var y = 0, ylen = tiles.length; y < ylen; y++){
       for(var x = 0, xlen = tiles[0].length; x < xlen; x++){
 
-        var index = tiles[y][x];
-        var texture = this.textureArray[index];
-        var cube = this.makeCube(texture);
+        index = tiles[y][x];
+        texture = this.textureArray[index];
+        cube = this.makeCube(texture);
 
         cube.position.setX(x);
         cube.position.setZ(y);
@@ -63,6 +64,28 @@ Renderer.prototype = {
 
       }
     }
+
+    var frontofpokecentre = world.heights.buildings.computedHeights[0];
+
+    var hackHeight = frontofpokecentre[0][0].y; // hack for now
+
+    for(var row = 0, rowlength = frontofpokecentre.length; row < rowlength; row++){
+      for(var cell = 0, celllength = frontofpokecentre[0].length; cell < celllength; cell++){
+        var item = frontofpokecentre[row][cell];
+        texture = this.textureArray[item.texture];
+       
+        cube = this.makeCube(texture);
+
+        cube.position.setX(item.x);
+        cube.position.setZ(hackHeight);
+        cube.position.setY(item.height);
+
+        scene.add(cube);
+
+      }
+    }
+
+
   },
 
 

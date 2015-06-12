@@ -45,7 +45,7 @@ function GameWorld(data){
   this.tiles = getTileMap(data, this);
 
   var heights = new Heights();
-  heights.computeHeights(this.tiles);
+  this.heights = heights.computeHeights(this.tiles);
 
   this.width = this.tiles[0].length;
   this.height = this.tiles.length;
@@ -81,14 +81,6 @@ GameWorld.prototype = {
     } else {
       return 0;
     }
-  },
-
-  getTile : function(number, color, imageNumber){
-    return {
-      number : number,
-      color : color || undefined,
-      tileImage : imageNumber
-    };
   }
 
 };

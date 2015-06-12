@@ -36,11 +36,14 @@ Heights.prototype = {
         if(elem.isEnd(currentTile, nextTile)){
           foundEnd = true;
 
+          var dataforRow = data[y].slice(x,i+1);
+
           var row = {
             x : x,
             end : i,
             y : y,
-            width : i - x + 1
+            width : i - x + 1,
+            data :dataforRow
           };
 
           elem.add(row);
@@ -76,11 +79,12 @@ Heights.prototype = {
       index++;
     }
 
-    building.mapHeights();
+   var walls = building.mapHeights();
 
     return {
       buildings : building,
-      cliffs : cliff
+      cliffs : cliff,
+      walls : walls
     };
   },
 
