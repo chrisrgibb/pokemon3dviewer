@@ -79,13 +79,12 @@ Heights.prototype = {
       index++;
     }
 
-   var walls = building.mapHeights();
+   var finishedBuildings = building.mapHeights();
 
     return {
       buildings : building,
       cliffs : cliff,
-      walls : walls,
-      buildings2 : walls
+      finalBuildings : finishedBuildings
     };
   },
 

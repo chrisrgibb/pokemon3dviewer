@@ -47,6 +47,7 @@ function GameWorld(data){
   var heights = new Heights();
   this.heights = heights.computeHeights(this.tiles);
 
+
   this.width = this.tiles[0].length;
   this.height = this.tiles.length;
   this.light = 0.6;
@@ -63,16 +64,13 @@ GameWorld.prototype = {
     return true;
   },
 
+  getBuildings : function(){
+    return this.heights.finalBuildings;
+  },
+
   getHeight : function(tilenumber){
     var mapping = {
-      17 : 1,
-      15 : 1,
-      78 : 1,
-
-      26 : 1,
-      27 : 1,
-      28 : 1,
-      74 : 1
+      17 : 1
     };
 
     var height = mapping[tilenumber];

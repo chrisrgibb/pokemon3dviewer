@@ -94,7 +94,7 @@ Building.prototype = {
 
         function convertBuildingFront(rows){
           var collectHeights = [];
-          // var height =
+          var yposition = rows[rows.length-1].y; // this will eventually be the Z position for the front of the building
 
           for(var i = height-1; i >= buildingHeight; i--){
             // start at bottom of wall
@@ -102,7 +102,7 @@ Building.prototype = {
 
             rw.height = height - i; // height of row
 
-            var translatedRow = buildingjs.translateRow(rw);
+            var translatedRow = buildingjs.translateRow(rw, null, yposition );
 
             collectHeights.push(translatedRow);
 
@@ -166,12 +166,13 @@ Building.prototype = {
 
     var mapTiles = function(tileIndex, index, array){
       var row = this.row,
-          height = this.height;
+          height = this.height,
+          translatedY = this.y || row.y;
 
       // debugger;
       var translated = {
         x : row.x + index,
-        y : row.y,
+        y : translatedY,
         height : row.height || height,
         // height : height-1,
         texture : tileIndex
