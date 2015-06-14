@@ -25,7 +25,7 @@ Renderer.prototype = {
       renderer.THREErenderer.setClearColor( 0xffffff, 1 );
 
 
-      var directionalLight = new THREE.PointLight( 0xffffff, 2 );
+      var directionalLight = new THREE.PointLight( 0xffffff, 4 );
       directionalLight.position.set( 10, 8, 20 );
 
       renderer.scene = new THREE.Scene();
@@ -65,15 +65,18 @@ Renderer.prototype = {
       }
     }
 
-    var frontofpokecentre = world.heights.buildings.computedHeights[0];
+    var frontofpokecentre = world.heights.buildings.computedHeights[0].frontWall; // this is the 2d representation of the poke center
+                                                                        // which in 3d will be just the front wall
 
-    var hackHeight = frontofpokecentre[0][0].y; // hack for now
+
+
+    var hackHeight = frontofpokecentre[0][0].y; // hack for now, getting the y from the bottommost rowe
 
     for(var row = 0, rowlength = frontofpokecentre.length; row < rowlength; row++){
       for(var cell = 0, celllength = frontofpokecentre[0].length; cell < celllength; cell++){
         var item = frontofpokecentre[row][cell];
         texture = this.textureArray[item.texture];
-       
+
         cube = this.makeCube(texture);
 
         cube.position.setX(item.x);
@@ -81,6 +84,25 @@ Renderer.prototype = {
         cube.position.setY(item.height);
 
         scene.add(cube);
+
+      }
+    }
+
+    var roof = world.heights.buildings.computedHeights[0].roof;
+
+    for(var row = 0, rowlength = roof.length; row < rowlength; row++){
+      for(var cell = 0, celllength = roof[0].length; cell < celllength; cell++){
+
+        var item = roof[row][cell];
+        texture = this.textureArray[item.texture];
+
+        cube = this.makeCube(texture);
+        cube.position.setX(item.x);
+        cube.position.setZ(item.y);
+        cube.position.setY(item.height);
+
+        scene.add(cube);
+
 
       }
     }
@@ -111,6 +133,8 @@ Renderer.prototype = {
   },
 
   render : function(){
+    this.camera.rotation = player.rotation;
+    this.camera.position = player.position;
     this.THREErenderer.render(this.scene, this.camera);
   }
 

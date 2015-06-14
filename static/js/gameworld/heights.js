@@ -67,7 +67,7 @@ Heights.prototype = {
           nextTile;
 
           currentTile = data[y][x];
-      console.log(y + " " + x + " index : " + index);
+      // console.log(y + " " + x + " index : " + index);
 
       if(cliff.match(currentTile, index)) {
         parse(cliff);
@@ -84,7 +84,8 @@ Heights.prototype = {
     return {
       buildings : building,
       cliffs : cliff,
-      walls : walls
+      walls : walls,
+      buildings2 : walls
     };
   },
 

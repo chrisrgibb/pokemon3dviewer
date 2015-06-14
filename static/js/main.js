@@ -26,6 +26,11 @@ function init(){
 
         do3js(textureArray, gameWorld);
 
+        player = new Player();
+        player.position.set(3, 10, 25);
+        player.rotation.order = "YXZ";
+
+
       });
 
     });
@@ -39,6 +44,7 @@ init();
 function update(){
   requestAnimationFrame( update );
   renderer.render();
+  player.update();
 }
 
 function do3js(textureArray, gameWorld){
