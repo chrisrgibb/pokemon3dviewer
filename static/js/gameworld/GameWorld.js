@@ -68,6 +68,30 @@ GameWorld.prototype = {
     return this.heights.finalBuildings;
   },
 
+  /**
+  * returns an array of objects representing a 3d cube in the game
+  * @object{ 
+  *   x 
+  *   y 
+  *   height 
+  *   tileImage 
+  *   }
+  *
+  */
+  getMapData : function(){
+    var buildings = this.getBuildings();
+    var array = [];
+    
+    // collect up all the coordinates of the buildings
+    for(var b = 0 ; b < buildings.length; b++){
+      array = array.concat.apply(array, buildings[b].frontWall);
+      array = array.concat.apply(array, buildings[b].roof);
+      array = array.concat(buildings[b].walls);
+    }
+
+    return array;
+  },
+
   getHeight : function(tilenumber){
     var mapping = {
       17 : 1

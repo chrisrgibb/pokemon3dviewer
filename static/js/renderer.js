@@ -23,16 +23,18 @@ Renderer.prototype = {
       document.body.appendChild( renderer.THREErenderer.domElement );
 
       renderer.THREErenderer.setClearColor( 0xffffff, 1 );
-
-
-      var directionalLight = new THREE.PointLight( 0xffffff, 4 );
-      directionalLight.position.set( 10, 8, 20 );
-
-
-
       renderer.scene = new THREE.Scene();
 
-      renderer.scene.add( directionalLight );
+
+      // var directionalLight = new THREE.PointLight( 0xffffff, 4 );
+      // directionalLight.position.set( 10, 8, 20 );
+
+      var light = new THREE.AmbientLight( 0xffffff ); // soft white light
+      renderer.scene.add( light );
+
+    
+
+      // renderer.scene.add( directionalLight );
 
       renderer.camera.rotation.order = "YXZ";
       renderer.camera.position.set(3, 10,25);
@@ -70,34 +72,52 @@ Renderer.prototype = {
     var frontofpokecentre = buildings[0].frontWall; // this is the 2d representation of the poke center
                                                     // which in 3d will be just the front wall
 
-
+    var buildings2 = world.getMapData();                                             
 
     var renderer = this;
 
-    addArray(buildings[0].frontWall, scene);
-    addArray(buildings[0].roof, scene);
-    addArray(buildings[1].frontWall, scene);
-    addArray(buildings[1].roof, scene);
+addArray(buildings2, scene);
+    // addArray2D(buildings[0].frontWall, scene);
+    // addArray2D(buildings[0].roof, scene);
+    // addArray2D(buildings[1].frontWall, scene);
+    // addArray2D(buildings[1].roof, scene);
+    // addArray(buildings[1].walls, scene);
+    // addArray(buildings[0].walls, scene);
 
+
+    // function addArray2D(array, scene){
+
+
+    //   for(var row = 0, rowlength = array.length; row < rowlength; row++){
+    //     for(var cell = 0, celllength = array[0].length; cell < celllength; cell++){
+
+    //       var item = array[row][cell];
+    //       texture = renderer.textureArray[item.texture];
+
+    //       cube = renderer.makeCube(texture);
+
+    //       cube.position.setX(item.x);
+    //       cube.position.setZ(item.y);
+    //       cube.position.setY(item.height);
+
+    //       scene.add(cube);
+
+    //     }
+    //   }
+    // }
 
     function addArray(array, scene){
-
-
       for(var row = 0, rowlength = array.length; row < rowlength; row++){
-        for(var cell = 0, celllength = array[0].length; cell < celllength; cell++){
+        var item = array[row];
+        texture = renderer.textureArray[item.texture];
 
-          var item = array[row][cell];
-          texture = renderer.textureArray[item.texture];
+        cube = renderer.makeCube(texture);
 
-          cube = renderer.makeCube(texture);
+        cube.position.setX(item.x);
+        cube.position.setZ(item.y);
+        cube.position.setY(item.height);
 
-          cube.position.setX(item.x);
-          cube.position.setZ(item.y);
-          cube.position.setY(item.height);
-
-          scene.add(cube);
-
-        }
+        scene.add(cube);
       }
     }
 

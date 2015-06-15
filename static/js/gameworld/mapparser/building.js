@@ -1,7 +1,9 @@
-function Building(config){
+function CreateBuilding(data){
   this.startTiles = [15, 76, 78, 90,92 ];
   this.endTiles = [31, 77, 79, 90, 93];
   this.sidewall = 75;
+
+  this.tiles = data;
 
   // this.startCharacters =
 
@@ -11,7 +13,7 @@ function Building(config){
 
 
 
-Building.prototype = {
+CreateBuilding.prototype = {
 
   parse : function(){
 
@@ -114,7 +116,7 @@ Building.prototype = {
 
         building.frontWall = convertBuildingFront(section.rows);
 
-        this.createWalls(buildingX, buildingY, width, buildingY, height);
+        building.walls = this.createWalls(buildingX, buildingY, width, buildingY, height-roofsize);
 
         this.computedHeights.push(building);
 
@@ -130,9 +132,37 @@ Building.prototype = {
   },
 
   createWalls : function(ox, oy, dx, dy, height){
+    var wallArray = [];
+    // create rear wall
+    for(var xx = ox; xx < ox + dx; xx++){
+      for(var j = 0; j < height; j++){
+        wallArray.push({
+          x : xx,
+          y : oy,
+          height : j+1,
+          texture : this.sidewall
+        });
+      }
+    }
 
+    function createSideWall(xposition, texture){
+     for(var yy = oy+1; yy < oy+3; yy++){
+        for(var j = 0; j < height; j++){
+          wallArray.push({
+            x : xposition,
+            y : yy,
+            height : j+1,
+            texture : texture
+          });
+        }
+      }
+    }
 
+    createSideWall(ox, this.sidewall);
+    createSideWall(ox + dx-1, this.sidewall);
 
+   
+    return wallArray;
   },
 
   // turns all the tiles for roofs from a number into an object containing, x, y, height and the tile index
@@ -174,7 +204,6 @@ Building.prototype = {
         x : row.x + index,
         y : translatedY,
         height : row.height || height,
-        // height : height-1,
         texture : tileIndex
       }
 

@@ -18,7 +18,7 @@ Heights.prototype = {
     var sections = [];
 
     var cliff = new Cliff();
-    var building = new Building();
+    var building = new CreateBuilding(data);
 
     var parse = function(elem){
       // find end of first row that will give us the width
