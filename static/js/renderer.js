@@ -39,6 +39,7 @@ Renderer.prototype = {
       renderer.camera.rotation.order = "YXZ";
       renderer.camera.position.set(3, 10,25);
 
+      renderer.loadTextures();
 
       renderer.addWorldToScene(renderer.scene, gameWorld);
 
@@ -51,12 +52,16 @@ Renderer.prototype = {
     var tiles = world.tiles,
     cube, texture, index;
 
+    var geometry = new THREE.BoxGeometry( 1, 1, 1 ); 
+
     for(var y = 0, ylen = tiles.length; y < ylen; y++){
       for(var x = 0, xlen = tiles[0].length; x < xlen; x++){
 
         index = tiles[y][x];
-        texture = this.textureArray[index];
-        cube = this.makeCube(texture);
+
+        var material = this.materials[index]
+
+        var cube = new THREE.Mesh( geometry, material );
 
         cube.position.setX(x);
         cube.position.setZ(y);
@@ -76,7 +81,7 @@ Renderer.prototype = {
 
     var renderer = this;
 
-addArray(buildings2, scene);
+    // addArray(buildings2, scene);
     // addArray2D(buildings[0].frontWall, scene);
     // addArray2D(buildings[0].roof, scene);
     // addArray2D(buildings[1].frontWall, scene);
@@ -109,9 +114,10 @@ addArray(buildings2, scene);
     function addArray(array, scene){
       for(var row = 0, rowlength = array.length; row < rowlength; row++){
         var item = array[row];
-        texture = renderer.textureArray[item.texture];
 
-        cube = renderer.makeCube(texture);
+        var material = renderer.materials[item.texture];
+
+        cube = new THREE.Mesh( geometry, material );
 
         cube.position.setX(item.x);
         cube.position.setZ(item.y);
@@ -142,9 +148,16 @@ addArray(buildings2, scene);
 
 
   loadTextures : function(){
+    var len = this.textureArray.length;
+    this.materials = [];
+    for(var i = 0; i < len; i++){
+      var texture = this.textureArray[i];
 
-
-
+      var basicMesh = new THREE.MeshBasicMaterial({
+          map : texture
+        });
+      this.materials.push(basicMesh);
+    }
   },
 
   render : function(){
