@@ -59,9 +59,9 @@ Renderer.prototype = {
 
         index = tiles[y][x];
 
-        var material = this.materials[index]
+        var material = this.materials[index];
 
-        var cube = new THREE.Mesh( geometry, material );
+        cube = new THREE.Mesh( geometry, material );
 
         cube.position.setX(x);
         cube.position.setZ(y);
@@ -73,7 +73,7 @@ Renderer.prototype = {
 
       }
     }
-    var buildings = world.getBuildings()
+    var buildings = world.getBuildings();
     var frontofpokecentre = buildings[0].frontWall; // this is the 2d representation of the poke center
                                                     // which in 3d will be just the front wall
 

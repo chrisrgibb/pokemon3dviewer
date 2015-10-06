@@ -26,4 +26,4 @@ Player.prototype.update = function(){
     this.rotateOnAxis( new THREE.Vector3(0,1,0), -rotateAngle);
     renderer.camera.rotateOnAxis( new THREE.Vector3(0,1,0), -rotateAngle);
   }
-}
+};
