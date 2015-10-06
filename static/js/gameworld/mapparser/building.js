@@ -26,8 +26,8 @@ CreateBuilding.prototype = {
   },
 
   isEnd : function(currentTile, nextTile){
-    return this.endTiles.indexOf(currentTile) > -1 &&
-           this.endTiles.indexOf(nextTile) === -1;
+    return this.endTiles.indexOf(currentTile) > -1
+     // && this.endTiles.indexOf(nextTile) === -1;
   },
 
   add : function(row){
@@ -158,8 +158,8 @@ CreateBuilding.prototype = {
       }
     }
 
-    createSideWall(ox, this.sidewall);
-    createSideWall(ox + dx-1, this.sidewall);
+    createSideWall(ox, this.sidewall);// left
+    createSideWall(ox + dx-1, this.sidewall); //right
 
    
     return wallArray;
@@ -199,7 +199,7 @@ CreateBuilding.prototype = {
           height = this.height,
           translatedY = this.y || row.y;
 
-      // debugger;
+
       var translated = {
         x : row.x + index,
         y : translatedY,

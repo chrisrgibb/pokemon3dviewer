@@ -32,31 +32,34 @@ def image_proxy(path):
 
 @app.route('/leveldata/<level_id>')
 def get_level_data(level_id):
-	#
+
+	#  TODO level_id is a string, could change it later
 	tiles = myextract.get_tile_data()
 	blocks = myextract.get_blocks(level_id)
-	headers = myextract.get_headers(level_id)
+	headers = myextract.get_map_header(level_id)
 	collision_data = myextract.get_collision_data(level_id)
 	t = headers['tileset']
+
+	spawnpoints = myextract.get_connection_data(level_id)
 
 	print "------"
 	tile_images = myextract.get_tile_images(int(t, 16))
 
 	# jsonify will do for us all the work, returning the
 	# previous data structure in JSON
-	jaso = {
+	data = {
 		'tiles' : tiles,
 		'blocks' : blocks,
 		'headers' : headers,
 		'collisions' : collision_data,
-		'tile_images' : tile_images
+		'tile_images' : tile_images,
+		'spawn_points' : spawnpoints
 	}
 
-	return jsonify(jaso)
+	return jsonify(data)
 
 if __name__ == '__main__':
     sys.path.append('/pokefiles')
     import pokefiles.myextract as myextract
-
 
     app.run()

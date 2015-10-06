@@ -19,6 +19,7 @@ Heights.prototype = {
 
     var cliff = new Cliff();
     var building = new CreateBuilding(data);
+    var bush = new Bush(data);
 
     var parse = function(elem){
       // find end of first row that will give us the width
@@ -27,8 +28,7 @@ Heights.prototype = {
           nextTile = data[y][j];
       var foundEnd = false;
 
-
-      while(!foundEnd){
+      while(!foundEnd && i < end-1){
         i++; j++;
         currentTile = data[y][i];
         nextTile = data[y][j];
@@ -67,19 +67,22 @@ Heights.prototype = {
           nextTile;
 
           currentTile = data[y][x];
-      // console.log(y + " " + x + " index : " + index);
-
+    
       if(cliff.match(currentTile, index)) {
         parse(cliff);
       }
       if(building.match(currentTile, index)){
         parse(building);
       }
+      if(bush.match(currentTile, index)){
+        parse(bush);
+      }
 
       index++;
     }
 
    var finishedBuildings = building.mapHeights();
+   var bushes = bush.mapHeights();
 
     return {
       buildings : building,

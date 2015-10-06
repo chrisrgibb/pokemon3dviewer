@@ -44,6 +44,10 @@ function GameWorld(data){
   this.collisions = data.collisions;
   this.tiles = getTileMap(data, this);
 
+
+  /*
+   * Convert everything to 3D
+   */
   var heights = new Heights();
   this.heights = heights.computeHeights(this.tiles);
 

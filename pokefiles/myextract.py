@@ -135,8 +135,8 @@ def do_tileblocks(tileblock_id):
 	# print blockset_id
 	data = []
 	for block_id in range(0, blockcount):
-		start_address2 = start_address + (16* block_id)
-		end_address2 = start_address + (16* block_id) + 16
+		start_address2 = start_address + (16 * block_id)
+		end_address2 = start_address + (16 * block_id) + 16
 		data.append( ex.rom[start_address2:end_address2])
 		# print " length =  {}".format(len(data))
 	return data
@@ -194,11 +194,10 @@ def print_map(map_array):
 
 
 
-def get_map(mapp):
-	map = headers[mapp]
-	# print "drawing map : {0}".format(map["name"])
+def get_map(mapindex):
+	map = headers[mapindex]
 
-	print_properties(map)
+	# print_properties(map)
 	width = int(map["x"], 16)
 	height = int(map["y"], 16)
 
@@ -245,8 +244,6 @@ def get_tile_images(x):
 	return data
 ## MAIN ##
 
-print "my extract class"
-
 headers = ex.read_all_map_headers()
 
 map_properties = [
@@ -258,27 +255,63 @@ map_properties = [
 "num_connections"
 ]
 
-
-
-# blocks = get_map(3)
-
 # turns data in tile blocks
 data = do_tileblocks("Tset00_Block");
 
 # load tileset
-g = tileset.tileset()
-g.add(data)
-
-# print get_collision_data(1)
+list_of_tiles = tileset.tileset()
+list_of_tiles.add(data)
 
 def get_tile_data():
-	return g.get_all_tiles()
+	return list_of_tiles.get_all_tiles()
 
 def get_blocks(x):
 	map_no = int(x)
 	# have to cast to int for some reason
 	return get_map(map_no)
 
-def get_headers(x):
+def get_map_header(x):
 	level_id = int(x)
 	return headers[level_id]
+
+def get_size_of_all_maps():
+	for mapname in headers:
+		mapdata = headers[mapname]
+		if int(mapdata["tileset"], 16) == 0:
+			print "{0} : {1} , {2} x {3}".format(mapname,mapdata["name"], int(mapdata["x"], 16), int(mapdata["y"], 16))
+
+
+# The points that a player enters into a map are stored in the maps adjacent to it
+# this method iterates over those adjacent maps and finds the points
+def get_connection_data(map_id):
+	header = get_map_header(map_id)
+
+	points = []
+
+	for connection_id in header["connections"]:
+		
+		connection_map_id = header["connections"][connection_id]["map_id"]
+
+		print "======\n"
+		# get the other map
+		other_connection = get_map_header(connection_map_id)
+		
+		values = other_connection['connections'].values()
+		print map_id == '5'
+		print filter(lambda x : x['map_id'] == int(map_id) , values)
+
+		thismap = filter(lambda x : x['map_id'] == int(map_id) , values)
+
+		
+		for connection in thismap:
+			map_points = {}
+			print connection['x']
+			map_points['x'] = connection['x']
+			map_points['y'] = connection['y']
+			map_points['direction'] = connection['direction']
+			points.append(map_points)
+
+		# points.append(map_points)
+	return points
+	# return 
+

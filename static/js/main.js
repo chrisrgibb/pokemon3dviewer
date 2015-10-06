@@ -8,7 +8,7 @@ var imageArray = [],
   player;
 
 function init(){
-  var level = 4;
+  var level = 1;
 
   var loader = new THREE.XHRLoader();
 
@@ -27,19 +27,14 @@ function init(){
         do3js(textureArray, gameWorld);
 
         player = new Player();
-        player.position.set(3, 10, 25);
+        player.position.set(3, 3, 25);
         player.rotation.order = "YXZ";
-
-
       });
 
     });
   });
-
 }
 
-
-init();
 
 function update(){
   requestAnimationFrame( update );
@@ -47,17 +42,22 @@ function update(){
   player.update();
 }
 
+/*
+* takes the array of textures and the game world and creates a renderer to render them
+*
+*/
 function do3js(textureArray, gameWorld){
 
   renderer = new Renderer(textureArray);
 
-  renderer.init(null, gameWorld).then(function(){
+  renderer.init(gameWorld).then(function(){
 
     renderer.render();
     update();
 
   });
-
-
-
 }
+
+
+init();
+

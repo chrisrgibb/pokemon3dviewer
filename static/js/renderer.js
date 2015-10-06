@@ -9,7 +9,7 @@ function Renderer(images){
 Renderer.prototype = {
 
 
-  init : function(scne /*TODO fix this*/,gameWorld){
+  init : function(gameWorld){
     var renderer = this;
     return new Promise(function(fulfill, reject){
 
@@ -37,7 +37,7 @@ Renderer.prototype = {
       // renderer.scene.add( directionalLight );
 
       renderer.camera.rotation.order = "YXZ";
-      renderer.camera.position.set(3, 10,25);
+      renderer.camera.position.set(3, 3,25);
 
       renderer.loadTextures();
 
@@ -81,7 +81,7 @@ Renderer.prototype = {
 
     var renderer = this;
 
-    // addArray(buildings2, scene);
+    addArray(buildings2, scene);
     // addArray2D(buildings[0].frontWall, scene);
     // addArray2D(buildings[0].roof, scene);
     // addArray2D(buildings[1].frontWall, scene);

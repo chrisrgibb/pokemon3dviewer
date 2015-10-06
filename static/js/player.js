@@ -9,11 +9,10 @@ Player.prototype = Object.create( THREE.Object3D.prototype );
 
 Player.prototype.update = function(){
   var rotateAngle = 0.25;
-  var moveDistance = 0.3;
+  var moveDistance = 0.4;
   if(Controls.keys.up){
     this.translateZ( -moveDistance);
     renderer.camera.translateZ( -moveDistance);
-    console.log('up');
   }
   if(Controls.keys.down){
     this.translateZ( moveDistance);
