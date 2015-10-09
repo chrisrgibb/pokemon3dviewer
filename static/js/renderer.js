@@ -13,11 +13,15 @@ Renderer.prototype = {
     var renderer = this;
     return new Promise(function(fulfill, reject){
 
+      var screenWidth = window.innerWidth * 0.8,
+          screenHeight = window.innerHeight *0.8,
+          aspectRatio = screenWidth / screenHeight;
 
-      renderer.camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
+      
+      renderer.camera = new THREE.PerspectiveCamera( 75, aspectRatio, 0.1, 1000 );
       renderer.THREErenderer = new THREE.WebGLRenderer();
 
-      renderer.THREErenderer.setSize( window.innerWidth, window.innerHeight );
+      renderer.THREErenderer.setSize( screenWidth, screenHeight );
 
       // maybe move this out to main method
       document.body.appendChild( renderer.THREErenderer.domElement );
@@ -126,7 +130,6 @@ Renderer.prototype = {
         scene.add(cube);
       }
     }
-
 
   },
 

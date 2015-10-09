@@ -33,6 +33,8 @@ function init(){
 
     });
   });
+
+  document.getElementById('uicontrols').style.display = "none";
 }
 
 
@@ -59,5 +61,5 @@ function do3js(textureArray, gameWorld){
 }
 
 
-init();
+// init();
 

@@ -121,14 +121,15 @@ tbs = [ "Tset00_Block", "Tset01_Block"]
 
 def do_tileblocks(tileblock_id):
 
-	print "do_tileblocks"
+	print "creating tileblocks...."
 	# for tileblock_id in tileblocks.keys():
+
 	tileblock = tileblocks[tileblock_id]
 	start_address = tileblock[0]
 	end_address = tileblock[1]
 	blockcount = (end_address - start_address) / 16
 	main_data = ex.rom[start_address:end_address]
-	# print start_address, end_address
+	
 	print 'block count {0}'.format(blockcount)
 
 	blockset_id = int(tileblock_id[4:6], 16) # 00
@@ -140,10 +141,6 @@ def do_tileblocks(tileblock_id):
 		data.append( ex.rom[start_address2:end_address2])
 		# print " length =  {}".format(len(data))
 	return data
-
-# def get_tile(x, y):
-# 	## 4x4 array of tiles
-# 	index = y * 4 + x
 
 
 def dumpShit():
@@ -242,25 +239,6 @@ def get_tile_images(x):
 		data.append(ord(b))
 
 	return data
-## MAIN ##
-
-headers = ex.read_all_map_headers()
-
-map_properties = [
-"name",
-"tileset",
-"map_pointer",
-"x",
-"y",
-"num_connections"
-]
-
-# turns data in tile blocks
-data = do_tileblocks("Tset00_Block");
-
-# load tileset
-list_of_tiles = tileset.tileset()
-list_of_tiles.add(data)
 
 def get_tile_data():
 	return list_of_tiles.get_all_tiles()
@@ -313,5 +291,25 @@ def get_connection_data(map_id):
 
 		# points.append(map_points)
 	return points
-	# return 
+
+
+## MAIN ##
+
+headers = ex.read_all_map_headers()
+
+map_properties = [
+"name",
+"tileset",
+"map_pointer",
+"x",
+"y",
+"num_connections"
+]
+
+# turns data in tile blocks
+data = do_tileblocks("Tset00_Block");
+
+# load tileset
+list_of_tiles = tileset.tileset()
+list_of_tiles.add(data)
 

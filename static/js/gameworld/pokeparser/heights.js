@@ -21,6 +21,11 @@ Heights.prototype = {
     var building = new CreateBuilding(data);
     var bush = new Bush(data);
 
+
+    /**
+    * 
+    *
+    */
     var parse = function(elem){
       // find end of first row that will give us the width
       var i = x,

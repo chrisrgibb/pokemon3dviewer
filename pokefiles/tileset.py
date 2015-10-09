@@ -15,9 +15,8 @@ class tileset:
 			for d in line:
 				tile.append(ord(d))
 			self.tiles.append(tile)
-		# print "SELF.TILES"
-		# print self.tiles
 
+			
 	def get_tile(self, tileset_id, x, y):
 		tileset = self.tiles[tileset_id]
 		index = y * self.tiles_length + x

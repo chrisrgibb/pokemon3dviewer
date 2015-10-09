@@ -45,6 +45,6 @@ Bush.prototype = {
    	},
 
    	mapHeights : function(){
-   		debugger;
+
    	}
 };
