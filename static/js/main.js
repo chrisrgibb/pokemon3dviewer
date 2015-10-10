@@ -60,6 +60,24 @@ function do3js(textureArray, gameWorld){
   });
 }
 
+document.getElementById('fileupload').addEventListener('change', function(){
+  
+  var file = this.files[0];
+  var url = '/upload';
+  var xhr = new XMLHttpRequest();
+  var fd = new FormData();
+  
+  xhr.open('POST', url, true);
+
+  xhr.onreadystatechange = function(){
+    if(xhr.readyState === 4 && xhr.status){
+      alert(xhr.response);
+    }
+  }
+  fd.append('myfile', file);
+
+  xhr.send(fd);
+});
 
 // init();
 

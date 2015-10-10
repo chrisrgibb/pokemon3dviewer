@@ -1,5 +1,5 @@
 print ". venv/bin/activate"
-from flask import Flask, jsonify
+from flask import Flask, jsonify, request
 import os
 import io
 import sys
@@ -57,6 +57,19 @@ def get_level_data(level_id):
 	}
 
 	return jsonify(data)
+
+@app.route('/upload', methods=['POST'])
+def upload_file():
+	# rom_filename = os.path.join(os.getcwd(), "baserom.gbc")
+	# # rom = open(rom_filename, "rb").read()
+	# # print rom
+	try:
+		if request.method == 'POST':
+			file = request.files['myfile']
+			print(file.stream)
+			return 'success'
+	except:
+		return 'failure'
 
 if __name__ == '__main__':
     sys.path.append('/pokefiles')
