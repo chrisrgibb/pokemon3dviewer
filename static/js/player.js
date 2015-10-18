@@ -8,8 +8,9 @@ Player.prototype = Object.create( THREE.Object3D.prototype );
 
 
 Player.prototype.update = function(){
-  var rotateAngle = 0.25;
-  var moveDistance = 0.4;
+  var rotateAngle = 0.25,
+      moveDistance = 0.4;
+
   if(Controls.keys.up){
     this.translateZ( -moveDistance);
     renderer.camera.translateZ( -moveDistance);

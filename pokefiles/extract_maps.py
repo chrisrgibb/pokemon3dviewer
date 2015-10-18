@@ -11,6 +11,11 @@ base = 16
 # TODO: load the rom based on config.rom_path
 rom_filename = os.path.join(os.getcwd(), "baserom.gbc")
 rom = None #load the rom later
+myrom = {
+    "filelength" : -1,
+    "filename" : "noname",
+    "bytes" : -1
+}
 
 #map header pointers start at 0x1AE
 start_map_header_pointers = 0x1AE
@@ -387,7 +392,7 @@ def load_map_pointers():
                 }
         map_pointers[map] = entry
 
-    #print json.dumps(map_pointers)
+
 
 def read_connection_bytes(connection_bytes, bank):
     map_id = ord(connection_bytes[0])
@@ -681,6 +686,10 @@ def read_all_map_headers():
         map_headers[map_id] = map_header
 
     return map_headers
+
+def set_rom(rom):
+    global myrom
+    myrom = rom
 
 if __name__ == "__main__":
     #read binary data from file

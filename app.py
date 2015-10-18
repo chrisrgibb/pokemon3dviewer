@@ -5,7 +5,6 @@ import io
 import sys
 
 
-
 # import jsonify
 app = Flask(__name__, static_url_path='/')
 
@@ -22,12 +21,7 @@ def static_proxy(path):
 # path to all images
 @app.route('/images/<path:path>')
 def image_proxy(path):
-	print path
 	file = os.path.join('images', path)
-	# print file.read()
-	# return app.send_file(io.BytesIO(file.read()),
-	# 		attachment_filename=file,
-	# 		mimetype='image/png')
 	return app.send_static_file(os.path.join('images', path))
 
 @app.route('/leveldata/<level_id>')
@@ -58,18 +52,39 @@ def get_level_data(level_id):
 
 	return jsonify(data)
 
+@app.route('/rom')
+def get_rom():
+
+	if myextract.ex.myrom['bytes'] > -1:
+		return myextract.ex.myrom['filename']
+
+	return jsonify(myextract.ex.myrom)
+
 @app.route('/upload', methods=['POST'])
 def upload_file():
-	# rom_filename = os.path.join(os.getcwd(), "baserom.gbc")
-	# # rom = open(rom_filename, "rb").read()
-	# # print rom
 	try:
 		if request.method == 'POST':
 			file = request.files['myfile']
-			print(file.stream)
-			return 'success'
+			filename = file.filename
+			openfile = file.read()
+			filelength = len(openfile)
+			
+			myrom = {
+      			"bytes" : openfile,
+        		"filelength" : str(filelength),
+        		"filename" : filename
+    		}
+			myextract.ex.set_rom(myrom)
+
+			# return a bunch of levels and a url that the front end can connect
+			response = {
+				'message' : 'success'
+			}
+			return jsonify(response)
 	except:
 		return 'failure'
+
+
 
 if __name__ == '__main__':
     sys.path.append('/pokefiles')

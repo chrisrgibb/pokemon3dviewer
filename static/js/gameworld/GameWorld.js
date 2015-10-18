@@ -34,9 +34,10 @@ function GameWorld(data){
         var block = data.blocks[tileblocky][tileblockx];
         // get index of imagetile
         var index = (x % 4 ) + (y * 4) % 16;
+        //
         var tile = data.tiles[block][index];
 
-        array[y][x] = tile; // || ggs;
+        array[y][x] = tile;
       }
     }
     return array;

@@ -8,15 +8,21 @@ var imageArray = [],
   player;
 
 function init(){
-  var level = 1;
+  var level = document.getElementById('levelnumber').value || 2;
 
-  var loader = new THREE.XHRLoader();
+  var loader = new THREE.XHRLoader(),
+      onprogress = null, 
+      onError = function(res){
+        if(res.type === "error"){
+          alert("could not connect to server")
+        }
+      }
 
   loader.load('/leveldata/'+ level, function(blob){
 
     return new Promise(function(fulfill, reject){
       var data = JSON.parse(blob);
-
+    
       pipeline = new ImagePipeline(data);
       pipeline.createTileSheet(1);
 
@@ -27,14 +33,15 @@ function init(){
         do3js(textureArray, gameWorld);
 
         player = new Player();
-        player.position.set(3, 3, 25);
+        player.position.set(3, 9, 25);
         player.rotation.order = "YXZ";
       });
-
+        document.getElementById('mapname').innerHTML = data.headers.name;
     });
-  });
+  }, onprogress,  onError);
 
-  document.getElementById('uicontrols').style.display = "none";
+
+  // document.getElementById('uicontrols').style.display = "none";
 }
 
 

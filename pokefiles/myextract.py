@@ -143,14 +143,6 @@ def do_tileblocks(tileblock_id):
 	return data
 
 
-def dumpShit():
-	print "dumpShit"
-	start_address = 0xc23d
-	end_address = 0xc334
-	blockcount = (end_address - start_address) / 16
-	print blockcount
-
-
 def read_blockdata(map_header):
 	print("read_blockdata")
 	map_pointer = int(map_header["map_pointer"], 16)
@@ -241,12 +233,20 @@ def get_tile_images(x):
 	return data
 
 def get_tile_data():
+	# gets a list of the definitions of tiles
 	return list_of_tiles.get_all_tiles()
 
-def get_blocks(x):
-	map_no = int(x)
+def get_blocks(level_id):
+	map_no = int(level_id)
 	# have to cast to int for some reason
+	# because the rom is opened as a string!!!
 	return get_map(map_no)
+
+def get_map_pointers(level_id):
+	return ex.map_pointers[level_id]
+
+def get_map_name(level_id):
+	return get_map_pointers(level_id)['name']
 
 def get_map_header(x):
 	level_id = int(x)
@@ -275,8 +275,6 @@ def get_connection_data(map_id):
 		other_connection = get_map_header(connection_map_id)
 		
 		values = other_connection['connections'].values()
-		print map_id == '5'
-		print filter(lambda x : x['map_id'] == int(map_id) , values)
 
 		thismap = filter(lambda x : x['map_id'] == int(map_id) , values)
 
@@ -312,4 +310,5 @@ data = do_tileblocks("Tset00_Block");
 # load tileset
 list_of_tiles = tileset.tileset()
 list_of_tiles.add(data)
+
 
