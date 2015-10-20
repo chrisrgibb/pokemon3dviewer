@@ -149,6 +149,13 @@ Renderer.prototype = {
     return cube;
   },
 
+  getDOMElement : function(){
+    return this.THREErenderer.domElement;
+  },
+
+  removeFromDOM : function(){
+    document.body.removeChild(this.THREErenderer.domElement);
+  },
 
   loadTextures : function(){
     var len = this.textureArray.length;

@@ -252,6 +252,9 @@ def get_map_header(x):
 	level_id = int(x)
 	return headers[level_id]
 
+def get_all_headers():
+	return headers
+
 def get_size_of_all_maps():
 	for mapname in headers:
 		mapdata = headers[mapname]

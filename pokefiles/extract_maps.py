@@ -317,6 +317,7 @@ def load_rom(filename=None):
         rom = open(filename, "rb").read()
         return True
     except Exception as exception:
+        print(exception)
         print("error loading rom")
         return False
 
@@ -391,7 +392,6 @@ def load_map_pointers():
                 "bank": hex(get_nth_map_header_pointer_bank_byte(map))
                 }
         map_pointers[map] = entry
-
 
 
 def read_connection_bytes(connection_bytes, bank):

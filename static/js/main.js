@@ -9,6 +9,7 @@ var imageArray = [],
 
 function init(){
   var level = document.getElementById('levelnumber').value || 2;
+  var level  =  parseInt(document.getElementById('select-level').value);
 
   var loader = new THREE.XHRLoader(),
       onprogress = null, 
@@ -40,7 +41,6 @@ function init(){
     });
   }, onprogress,  onError);
 
-
   // document.getElementById('uicontrols').style.display = "none";
 }
 
@@ -57,6 +57,10 @@ function update(){
 */
 function do3js(textureArray, gameWorld){
 
+  if(renderer != null){
+    debugger;
+    renderer.removeFromDOM();
+  }
   renderer = new Renderer(textureArray);
 
   renderer.init(gameWorld).then(function(){
@@ -86,5 +90,26 @@ document.getElementById('fileupload').addEventListener('change', function(){
   xhr.send(fd);
 });
 
+function getValidMaps(){
+  var xhr = new XMLHttpRequest();
+  var url = '/levels'
+
+  xhr.onload = function(e){
+    var data = JSON.parse(this.responseText);
+    var selectlist =  document.getElementById('select-level');
+    selectlist.innerHTML = "";
+    for( var key in data){
+      var optionElement = document.createElement('option');
+      optionElement.value = key;
+      optionElement.innerHTML = data[key];
+      selectlist.appendChild(optionElement);
+    }
+  }
+
+  xhr.open('GET', url);
+  xhr.send();
+}
+
+getValidMaps();
 // init();
 

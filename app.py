@@ -84,6 +84,34 @@ def upload_file():
 	except:
 		return 'failure'
 
+# returns a list of all the levels with the level id and name
+@app.route('/levels')
+def get_levels():
+	hdrs = myextract.get_all_headers()
+	# print type (hdrs)
+	good_tilesets = ['0x0']
+	good_levels = {}
+
+
+	try:
+		for key in hdrs:
+			header = hdrs[key]
+
+			
+			newlevel = {}
+
+			level_id = header['id']
+			tileset = header['tileset']
+			name = header['name']
+
+			if level_id not in myextract.ex.bad_maps and tileset in good_tilesets:
+				good_levels[level_id] = name
+
+	except Exception as exception:
+		print exception
+		
+	return jsonify(good_levels)
+
 
 
 if __name__ == '__main__':
