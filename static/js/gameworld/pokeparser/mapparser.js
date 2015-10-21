@@ -22,7 +22,7 @@ MapParser.prototype = {
     * 
     *
     */
-    var parse = function(elem){
+    var tokenize = function(elem){
       // find end of first row that will give us the width
       var i = x,
           j = x + 1;
@@ -75,13 +75,13 @@ MapParser.prototype = {
           currentTile = data[y][x];
     
       if(cliff.match(currentTile, index)) {
-        parse(cliff);
+        tokenize(cliff);
       }
       if(building.match(currentTile, index)){
-        parse(building);
+        tokenize(building);
       }
       if(bush.match(currentTile, index)){
-        parse(bush);
+        tokenize(bush);
       }
 
       index++;
