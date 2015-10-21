@@ -49,7 +49,7 @@ function GameWorld(data){
   /*
    * Convert everything to 3D
    */
-  var heights = new Heights();
+  var heights = new MapParser();
   this.heights = heights.computeHeights(this.tiles);
 
 

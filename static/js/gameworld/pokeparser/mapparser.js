@@ -1,11 +1,7 @@
-function Heights(){
-
-
-
-
+function MapParser(){
 }
 
-Heights.prototype = {
+MapParser.prototype = {
 
   computeHeights : function(data){
 
@@ -34,7 +30,12 @@ Heights.prototype = {
       var foundEnd = false;
 
       while(!foundEnd && i < end-1){
-        i++; j++;
+        // increment across row until we have found the end of the element
+        if(y === 12){
+          // debugger;
+        }
+        i++; // x
+        j++; // x+1
         currentTile = data[y][i];
         nextTile = data[y][j];
 

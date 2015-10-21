@@ -31,7 +31,7 @@ function init(){
 
         gameWorld = new GameWorld(data);
 
-        do3js(textureArray, gameWorld);
+        init3js(textureArray, gameWorld);
 
         player = new Player();
         player.position.set(3, 9, 25);
@@ -55,10 +55,9 @@ function update(){
 * takes the array of textures and the game world and creates a renderer to render them
 *
 */
-function do3js(textureArray, gameWorld){
+function init3js(textureArray, gameWorld){
 
   if(renderer != null){
-    debugger;
     renderer.removeFromDOM();
   }
   renderer = new Renderer(textureArray);
