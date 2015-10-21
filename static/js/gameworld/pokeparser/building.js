@@ -1,5 +1,5 @@
 function CreateBuilding(data){
-  this.startTiles = [15, 76, 78, 90,92 ];
+  this.startTiles = [15, 76, 78, 90, 92]; 
   this.endTiles = [31, 77, 79, 90, 93];
   this.sidewall = 75;
 
@@ -35,6 +35,9 @@ CreateBuilding.prototype = {
     if(len===0){
       var newSection = new Section();
       newSection.add(row);
+      newSection.coords.x = row.x;
+      newSection.coords.y = row.y;
+      newSection.coords.width = row.width;
 
       this.sections.push(newSection);
     } else {
@@ -74,7 +77,8 @@ CreateBuilding.prototype = {
         var roofsize = 4,
             buildingHeight = height - roofsize,
             buildingX = section.rows[0].x,
-            buildingY = section.rows[0].y + roofsize, // start of building without the roof
+            // for the next line roofsize can be changed to buildingheight 
+            buildingY = section.rows[0].y + roofsize, // start of building without the roof 
             width = section.rows[0].width; // assumption that the width doesn't change
 
         var building = {
@@ -90,33 +94,12 @@ CreateBuilding.prototype = {
         */
 
         if(topleftcorner===76){ // double check again because i might change it
-          building.roof = this.convertRoof(section, roofsize);
+          building.roof = this.convertRoof(section, roofsize, buildingHeight);
         }
 
+        building.frontWall = this.convertBuildingFront(section.rows, height, roofsize);
 
-        function convertBuildingFront(rows){
-          var collectHeights = [];
-          var yposition = rows[rows.length-1].y; // this will eventually be the Z position for the front of the building
-
-          for(var i = height-1; i >= buildingHeight; i--){
-            // start at bottom of wall
-            var rw = rows[i];
-
-            rw.height = height - i; // height of row
-
-            var translatedRow = buildingjs.translateRow(rw, null, yposition );
-
-            collectHeights.push(translatedRow);
-
-          }
-          return collectHeights;
-        }
-
-        var buildingjs = this;
-
-        building.frontWall = convertBuildingFront(section.rows);
-
-        building.walls = this.createWalls(buildingX, buildingY, width, buildingY, height-roofsize);
+        building.walls = this.createWalls(buildingX, buildingY, width, buildingY, buildingHeight); // should be front of building height?
 
         this.computedHeights.push(building);
 
@@ -131,7 +114,7 @@ CreateBuilding.prototype = {
 
   },
 
-  createWalls : function(ox, oy, dx, dy, height){
+  createWalls : function(ox, oy, dx, dy, height, frontWallSize){
     var wallArray = [];
     // create rear wall
     for(var xx = ox; xx < ox + dx; xx++){
@@ -165,9 +148,31 @@ CreateBuilding.prototype = {
     return wallArray;
   },
 
+  convertBuildingFront : function(rows, height, buildingHeight){
+     
+
+    var collectHeights = [];
+    var yposition = rows[rows.length-1].y; // this will eventually be the Z position for the front of the building
+
+    for(var i = height-1; i >= buildingHeight; i--){
+      // start at bottom of wall
+      var rw = rows[i];
+
+      rw.height = height - i; // height of row
+
+      var translatedRow = this.translateRow(rw, null, yposition );
+
+      collectHeights.push(translatedRow);
+
+    }
+    return collectHeights;
+  },
+
+
   // turns all the tiles for roofs from a number into an object containing, x, y, height and the tile index
-  convertRoof : function(section , roofsize){
+  convertRoof : function(section , roofsize, buildingHeight){
     var roof = [];
+    // TODO need to find y offset
 
     for(var i = 0; i < roofsize; i++){
       //
@@ -179,7 +184,7 @@ CreateBuilding.prototype = {
       newrow.forEach(function(item){
         var roofsize = this;
         item.y += roofsize;
-        item.height = roofsize + 1; // just a guess based on the size of the roof
+        item.height = buildingHeight + 1; // just a guess based on the size of the roof
       }, roofsize);
 
 

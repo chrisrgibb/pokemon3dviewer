@@ -29,7 +29,7 @@ function init(){
 
       pipeline.mapTextures().then(function(textureArray){
 
-        gameWorld = new GameWorld(data);
+        gameWorld = CreateGameWorld.create2d(data);
 
         init3js(textureArray, gameWorld);
 

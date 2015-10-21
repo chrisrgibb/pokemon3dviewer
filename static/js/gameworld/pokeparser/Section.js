@@ -2,6 +2,7 @@ function Section(){
   this.rows = [];
   this.size = 0;
   this.translated = {};
+  this.coords = {};
 
   this.canAdd = function(row){
     if(this.size === 0){
