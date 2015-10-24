@@ -19,12 +19,6 @@ function GameWorld(tiles, collisions){
   this.collisions = collisions;
   this.tiles = tiles;
 
-  /*
-   * Convert everything to 3D
-   */
- // var mapparser = new MapParser();
- // this.heights = mapparser.computeHeights(this.tiles);
-
 
   this.width = this.tiles[0].length;
   this.height = this.tiles.length;

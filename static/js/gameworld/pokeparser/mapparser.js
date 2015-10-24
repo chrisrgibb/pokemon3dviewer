@@ -88,7 +88,7 @@ MapParser.prototype = {
     }
 
    var finishedBuildings = building.mapHeights();
-   var bushes = bush.mapHeights();
+   var bushes = parseTheBush(bush.sections);
 
     return {
       buildings : building,

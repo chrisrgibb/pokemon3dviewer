@@ -78,7 +78,7 @@ Renderer.prototype = {
       }
     }
     var buildings = world.getBuildings();
-    var frontofpokecentre = buildings[0].frontWall; // this is the 2d representation of the poke center
+    var frontofpokecentre = buildings[0] ? buildings[0].frontWall : null; // this is the 2d representation of the poke center
                                                     // which in 3d will be just the front wall
 
     var buildings2 = world.getMapData();                                             
