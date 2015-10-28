@@ -3,7 +3,7 @@ function MapParser(){
 
 MapParser.prototype = {
 
-  computeHeights : function(data){
+  createTokens : function(data){
 
     var height = data.length,
         width = data[0].length,
@@ -93,7 +93,8 @@ MapParser.prototype = {
     return {
       buildings : building,
       cliffs : cliff,
-      finalBuildings : finishedBuildings
+      finalBuildings : finishedBuildings,
+      buildingSections : building.sections
     };
   },
 

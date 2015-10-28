@@ -22,7 +22,6 @@ CreateBuilding.prototype = {
 
   match : function(currentTile, currentIndex){
     return this.startTiles.indexOf(currentTile) > -1;
-
   },
 
   isEnd : function(currentTile, nextTile){
@@ -129,7 +128,14 @@ CreateBuilding.prototype = {
     }
 
     function createSideWall(xposition, texture){
-     for(var yy = oy+1; yy < oy+3; yy++){
+      /* x = X
+         y = Z
+         height = y
+         yy = Z
+      */
+
+
+     for(var yy = oy+1; yy < oy+ height - 1; yy++){
         for(var j = 0; j < height; j++){
           wallArray.push({
             x : xposition,
