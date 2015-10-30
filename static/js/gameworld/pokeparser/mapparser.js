@@ -31,7 +31,7 @@ MapParser.prototype = {
 
       while(!foundEnd && i < end-1){
         // increment across row until we have found the end of the element
-        if(y === 12){
+        if(y === 2){
           // debugger;
         }
         i++; // x
