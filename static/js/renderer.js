@@ -77,43 +77,12 @@ Renderer.prototype = {
 
       }
     }
-    var buildings = world.getBuildings();
-    var frontofpokecentre = buildings[0] ? buildings[0].frontWall : null; // this is the 2d representation of the poke center
-                                                    // which in 3d will be just the front wall
-
-    var buildings2 = world.getMapData();                                             
+    var cubeArray = world.getMapData();                                             
 
     var renderer = this;
 
-    addArray(buildings2, scene);
-    // addArray2D(buildings[0].frontWall, scene);
-    // addArray2D(buildings[0].roof, scene);
-    // addArray2D(buildings[1].frontWall, scene);
-    // addArray2D(buildings[1].roof, scene);
-    // addArray(buildings[1].walls, scene);
-    // addArray(buildings[0].walls, scene);
-
-
-    // function addArray2D(array, scene){
-
-
-    //   for(var row = 0, rowlength = array.length; row < rowlength; row++){
-    //     for(var cell = 0, celllength = array[0].length; cell < celllength; cell++){
-
-    //       var item = array[row][cell];
-    //       texture = renderer.textureArray[item.texture];
-
-    //       cube = renderer.makeCube(texture);
-
-    //       cube.position.setX(item.x);
-    //       cube.position.setZ(item.y);
-    //       cube.position.setY(item.height);
-
-    //       scene.add(cube);
-
-    //     }
-    //   }
-    // }
+    addArray(cubeArray, scene);
+    
 
     function addArray(array, scene){
       for(var row = 0, rowlength = array.length; row < rowlength; row++){

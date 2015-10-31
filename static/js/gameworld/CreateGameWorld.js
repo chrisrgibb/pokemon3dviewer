@@ -6,6 +6,13 @@ var CreateGameWorld = {
 		cliff : null
 	},
 
+	create : function(data){
+		var gameworld = this.create2d();
+
+
+
+	},
+
 
 	create2d : function(data){
 		

@@ -52,6 +52,7 @@ GameWorld.prototype = {
   */
   getMapData : function(){
     var buildings = this.getBuildings();
+    var bushes = this.heights.bushes;
     var array = [];
     
     // collect up all the coordinates of the buildings
@@ -60,6 +61,9 @@ GameWorld.prototype = {
       array = array.concat.apply(array, buildings[b].roof);
       array = array.concat(buildings[b].walls);
     }
+    // for(b = 0; b < bushes.length; b++){
+    //   array = array.concat.apply(array, bushes[b].data);
+    // }
 
     return array;
   },

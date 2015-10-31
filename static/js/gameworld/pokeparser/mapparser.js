@@ -94,7 +94,8 @@ MapParser.prototype = {
       buildings : building,
       cliffs : cliff,
       finalBuildings : finishedBuildings,
-      buildingSections : building.sections
+      buildingSections : building.sections,
+      bushes : bushes
     };
   },
 
