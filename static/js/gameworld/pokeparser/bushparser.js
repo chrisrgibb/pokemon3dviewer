@@ -31,6 +31,5 @@ function mapOneBush(bush, height){
 		texture : bush.data[1]
 	};
 
-	// debugger
 	return [cubeone, two];
 }

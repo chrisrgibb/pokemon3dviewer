@@ -58,6 +58,10 @@ CreateBuilding.prototype = {
     }
   },
 
+  getTokens : function(){
+    return this.sections;
+  },
+
   mapHeights : function(){
     this.computedHeights = []; // front of building
 
