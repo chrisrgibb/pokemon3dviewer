@@ -1,7 +1,7 @@
-function MapParser(){
+function MapTokenizer(){
 }
 
-MapParser.prototype = {
+MapTokenizer.prototype = {
 
   createTokens : function(data){
 
@@ -87,7 +87,7 @@ MapParser.prototype = {
       index++;
     }
 
-   var finishedBuildings = building.mapHeights();
+   var finishedBuildings = building.mapHeights(building.sections);
    var bushes = parseTheBush(bush.sections);
 
     return {
@@ -95,6 +95,7 @@ MapParser.prototype = {
       cliffs : cliff,
       finalBuildings : finishedBuildings,
       buildingSections : building.sections,
+      bushSections : bush.sections,
       bushes : bushes
     };
   },

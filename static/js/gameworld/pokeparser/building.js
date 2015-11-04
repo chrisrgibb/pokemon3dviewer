@@ -62,10 +62,10 @@ CreateBuilding.prototype = {
     return this.sections;
   },
 
-  mapHeights : function(){
-    this.computedHeights = []; // front of building
+  mapHeights : function(sections){
+    var computedHeights = []; // front of building
 
-    this.sections.forEach(function(section, index){
+    sections.forEach(function(section, index){
       // each section represents one building from the roof(if it has one) to the bottom
 
       var height = section.rows.length,
@@ -104,12 +104,12 @@ CreateBuilding.prototype = {
 
         building.walls = this.createWalls(buildingX, buildingY, width, buildingY, buildingHeight); // should be front of building height?
 
-        this.computedHeights.push(building);
+        computedHeights.push(building);
 
       }
     }, this);
 
-    return this.computedHeights;
+    return computedHeights;
   },
 
   turnbuildingintodata : function(building){

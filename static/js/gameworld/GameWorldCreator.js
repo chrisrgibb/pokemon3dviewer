@@ -8,11 +8,9 @@ var GameWorldCreator = {
 
 	create : function(data){
 		var gameworld = this.create2d(data);
-
-		gameworld.heights = this.create3d(gameworld);
-		return gameworld;
+		
+		return this.create3d(gameworld);;
 	},
-
 
 	create2d : function(data){
 		 // why didn't i put comments in i can't remember what the hell this is doing.
@@ -22,8 +20,16 @@ var GameWorldCreator = {
 	},
 
 	create3d : function(gameworld){
-		var mapparser = new MapParser();
- 		return mapparser.createTokens(gameworld.tiles);
+		var mapparser = new MapTokenizer();
+		var tokens = mapparser.createTokens(gameworld.tiles);
+
+		var building = new CreateBuilding();
+
+		gameworld.heights = {
+			bushes : parseTheBush(tokens.bushSections),
+			finalBuildings : building.mapHeights(tokens.buildingSections)
+		};
+ 		return gameworld;
 	},
 
 	createTiles : function(data){
@@ -50,5 +56,12 @@ var GameWorldCreator = {
 	      }
 	    }
 	    return array;
+	}, 
+
+	createBuildings : function(){
+
+
 	}
+
+
 }
