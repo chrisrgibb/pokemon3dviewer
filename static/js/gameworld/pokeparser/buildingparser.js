@@ -1,62 +1,9 @@
-function CreateBuilding(data){
-  this.startTiles = [15, 76, 78, 90, 92]; 
-  this.endTiles = [31, 77, 79, 90, 93];
-  this.sidewall = 75;
+function BuildingParser(){
+	this.sidewall = 75;
 
-  this.tiles = data;
-
-  // this.startCharacters =
-
-  this.sections = [];
-  this.rows = [];
 }
 
-
-
-CreateBuilding.prototype = {
-
-  match : function(currentTile, currentIndex){
-    return this.startTiles.indexOf(currentTile) > -1;
-  },
-
-  isEnd : function(currentTile, nextTile){
-    return this.endTiles.indexOf(currentTile) > -1
-     // && this.endTiles.indexOf(nextTile) === -1;
-  },
-
-  add : function(row){
-    var len = this.sections.length;
-    if(len===0){
-      var newSection = new Section();
-      newSection.add(row);
-      newSection.coords.x = row.x;
-      newSection.coords.y = row.y;
-      newSection.coords.width = row.width;
-
-      this.sections.push(newSection);
-    } else {
-      // check all sections to see if we can add to them
-      for(var i = 0; i < len; i++){
-
-        var section = this.sections[i];
-
-        if(section.canAdd(row)) {
-          section.add(row);
-          return;
-        }
-
-      }
-      var newSection = new Section();
-      newSection.add(row);
-
-      this.sections.push(newSection);
-    }
-  },
-
-  getTokens : function(){
-    return this.sections;
-  },
-
+BuildingParser.prototype =  {
   mapHeights : function(sections){
     var computedHeights = []; // front of building
 
@@ -226,4 +173,4 @@ CreateBuilding.prototype = {
       y : y
     }); // pass in as scope
   }
-}
+};

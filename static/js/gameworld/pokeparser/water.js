@@ -1,5 +1,6 @@
 function Water (argument) {
 	// body...
+	this.tiles = [];
 }
 
 Water.prototype = {

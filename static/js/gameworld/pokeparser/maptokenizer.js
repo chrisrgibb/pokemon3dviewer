@@ -63,6 +63,11 @@ MapTokenizer.prototype = {
       return -1;
     };
 
+    var findmatches = function(sup){
+      console.log(y);
+      return "hello";
+    }
+
 
     while(index < end-1){
 
@@ -83,9 +88,12 @@ MapTokenizer.prototype = {
       if(bush.match(currentTile, index)){
         tokenize(bush);
       }
+      // findmatches(y);
 
       index++;
     }
+
+
 
    var finishedBuildings = building.mapHeights(building.sections);
    var bushes = parseTheBush(bush.sections);

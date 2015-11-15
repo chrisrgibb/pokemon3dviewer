@@ -7,9 +7,10 @@ var GameWorldCreator = {
 	},
 
 	create : function(data){
-		var gameworld = this.create2d(data);
+		var gameworld2d = this.create2d(data);
+		var gameworld3d = this.create3d(gameworld2d);
 		
-		return this.create3d(gameworld);;
+		return gameworld3d;
 	},
 
 	create2d : function(data){
@@ -24,10 +25,11 @@ var GameWorldCreator = {
 		var tokens = mapparser.createTokens(gameworld.tiles);
 
 		var building = new CreateBuilding();
+		var buildingparser = new BuildingParser();
 
 		gameworld.heights = {
 			bushes : parseTheBush(tokens.bushSections),
-			finalBuildings : building.mapHeights(tokens.buildingSections)
+			finalBuildings : buildingparser.mapHeights(tokens.buildingSections)
 		};
  		return gameworld;
 	},
