@@ -41,7 +41,7 @@ Renderer.prototype = {
       // renderer.scene.add( directionalLight );
 
       renderer.camera.rotation.order = "YXZ";
-      renderer.camera.position.set(3, 3,25);
+      renderer.camera.position.set(3, 20,25);
 
       renderer.loadTextures();
 
@@ -77,6 +77,7 @@ Renderer.prototype = {
 
       }
     }
+    // get all the coordinates for the world
     var cubeArray = world.getMapData();                                             
 
     var renderer = this;

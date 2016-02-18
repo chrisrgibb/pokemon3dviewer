@@ -26,10 +26,12 @@ var GameWorldCreator = {
 
 		var building = new CreateBuilding();
 		var buildingparser = new BuildingParser();
+		var water = new WaterParser();
 
 		gameworld.heights = {
 			bushes : parseTheBush(tokens.bushSections),
-			finalBuildings : buildingparser.mapHeights(tokens.buildingSections)
+			finalBuildings : buildingparser.mapHeights(tokens.buildingSections),
+			water : water.parse(tokens.water)
 		};
  		return gameworld;
 	},

@@ -16,6 +16,7 @@ MapTokenizer.prototype = {
     var cliff = new Cliff();
     var building = new CreateBuilding(data);
     var bush = new Bush(data);
+    var water = new Water(data);
 
 
     /**
@@ -88,6 +89,9 @@ MapTokenizer.prototype = {
       if(bush.match(currentTile, index)){
         tokenize(bush);
       }
+      if(water.match(currentTile, index)){
+        tokenize(water);
+      }
       // findmatches(y);
 
       index++;
@@ -95,16 +99,17 @@ MapTokenizer.prototype = {
 
 
 
-   var finishedBuildings = building.mapHeights(building.sections);
-   var bushes = parseTheBush(bush.sections);
+  // var finishedBuildings = building.mapHeights(building.sections);
+   //var bushes = parseTheBush(bush.sections);
 
     return {
       buildings : building,
       cliffs : cliff,
-      finalBuildings : finishedBuildings,
+    //  finalBuildings : finishedBuildings,
       buildingSections : building.sections,
       bushSections : bush.sections,
-      bushes : bushes
+      water : water.sections
+     // bushes : bushes
     };
   },
 

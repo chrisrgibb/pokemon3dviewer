@@ -1,8 +1,9 @@
-function Section(){
+function Section(type){
   this.rows = [];
   this.size = 0;
   this.translated = {};
   this.coords = {};
+  this.type = type || "";
 
   this.canAdd = function(row){
     if(this.size === 0){

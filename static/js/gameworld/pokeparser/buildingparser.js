@@ -126,8 +126,10 @@ BuildingParser.prototype =  {
     var roof = [];
     // TODO need to find y offset
 
-    for(var i = 0; i < roofsize; i++){
-      //
+    for(var i = 0; i < roofsize; i++){  // should use buildingHeight as the length 
+      //however need to change the code to take into account roofs that are 
+      //bigger than 4 wide
+      // 
       var row = section.rows[i];
       // turn each index into a object with x y coordinates
       var newrow = this.translateRow(row, roofsize + 1);
@@ -156,15 +158,12 @@ BuildingParser.prototype =  {
           height = this.height,
           translatedY = this.y || row.y;
 
-
-      var translated = {
+      return  {
         x : row.x + index,
         y : translatedY,
         height : row.height || height,
         texture : tileIndex
       }
-
-      return translated;
     }
 
     return row.data.map(mapTiles, {

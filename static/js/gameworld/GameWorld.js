@@ -53,6 +53,7 @@ GameWorld.prototype = {
   getMapData : function(){
     var buildings = this.getBuildings();
     var bushes = this.heights.bushes;
+    var water = this.heights.water;
     var array = [];
     
     // collect up all the coordinates of the buildings
@@ -64,13 +65,17 @@ GameWorld.prototype = {
     // for(b = 0; b < bushes.length; b++){
     //   array = array.concat.apply(array, bushes[b].data);
     // }
-
+    // for(b = 0; b < water.length; b++){
+    //   array = array.concat.apply(array, water[b]);
+    // }
     return array;
   },
 
   getHeight : function(tilenumber){
+    // 
     var mapping = {
-      17 : 1
+      17 : 1,
+      20 : -1
     };
 
     var height = mapping[tilenumber];

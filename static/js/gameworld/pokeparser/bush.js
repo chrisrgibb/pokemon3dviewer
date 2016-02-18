@@ -13,6 +13,7 @@ function BushSection(){
 	this.size = 0;
 	this.translated = {};
 	this.coords = {};
+	this.type = "bush";
 
 	this.canAdd = function(row){
 		if(this.size === 0){
@@ -58,14 +59,14 @@ Bush.prototype = {
 		add : function(row){
 			var len = this.sections.length;
 			if(len===0){
-			var newSection = new BushSection();
-			newSection.add(row);
+				var newSection = new BushSection();
+				newSection.add(row);
 
-			this.sections.push(newSection);
+				this.sections.push(newSection);
 			} else {
 				// check all sections to see if we can add to them
 				var sectionToAddTo;
-			for(var i = 0; i < len; i++){
+				for(var i = 0; i < len; i++){
 
 				var section = this.sections[i];
 
