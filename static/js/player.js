@@ -28,3 +28,8 @@ Player.prototype.update = function(){
     renderer.camera.rotateOnAxis( new THREE.Vector3(0,1,0), -rotateAngle);
   }
 };
+
+Player.prototype.setPosition = function(x, y, z){
+  this.position.set(x, y, z);
+  renderer.camera.position.set(x, y, z);
+};

@@ -15,9 +15,9 @@ function init(){
       onprogress = null, 
       onError = function(res){
         if(res.type === "error"){
-          alert("could not connect to server")
+          alert("could not connect to server");
         }
-      }
+      };
 
   loader.load('/leveldata/'+ level, function(blob){
 
@@ -34,15 +34,17 @@ function init(){
         init3js(textureArray, gameWorld);
 
         player = new Player();
-        player.position.set(3, 9, 25);
         player.rotation.order = "YXZ";
+        player.setPosition(10, 6, 31);
+        
       });
-        document.getElementById('mapname').innerHTML = data.headers.name;
+        document.getElementById('mapname').innerText = data.headers.name;
     });
   }, onprogress,  onError);
 
   // document.getElementById('uicontrols').style.display = "none";
 }
+
 
 
 function update(){
@@ -64,6 +66,7 @@ function init3js(textureArray, gameWorld){
 
   renderer.init(gameWorld).then(function(){
 
+
     renderer.render();
     update();
 
@@ -81,9 +84,10 @@ document.getElementById('fileupload').addEventListener('change', function(){
 
   xhr.onreadystatechange = function(){
     if(xhr.readyState === 4 && xhr.status){
-      alert(xhr.response);
+      // alert(xhr.response);
+      console.log("success");
     }
-  }
+  };
   fd.append('myfile', file);
 
   xhr.send(fd);
@@ -91,7 +95,7 @@ document.getElementById('fileupload').addEventListener('change', function(){
 
 function getValidMaps(){
   var xhr = new XMLHttpRequest();
-  var url = '/levels'
+  var url = '/levels';
 
   xhr.onload = function(e){
     var data = JSON.parse(this.responseText);
@@ -103,7 +107,7 @@ function getValidMaps(){
       optionElement.innerHTML = data[key];
       selectlist.appendChild(optionElement);
     }
-  }
+  };
 
   xhr.open('GET', url);
   xhr.send();
